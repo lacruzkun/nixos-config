@@ -30,6 +30,10 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
+  i18n.inputMethod.enabled = "fcitx";
+
+  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ moz ];
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_NG";
     LC_IDENTIFICATION = "en_NG";
@@ -58,6 +62,10 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.gvfs.enable = true;
+  services.udev.packages = with pkgs; [
+    libmtp
+  ]
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -89,6 +97,7 @@
     ];
   };
 
+
   # Install firefox.
   programs.firefox.enable = true;
   programs.git = {
@@ -100,6 +109,31 @@
 	};
   };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.tinos
+    nerd-fonts.iosevka
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    ipafont
+    kochi-substitute
+    dancing-script
+  ]
+
+  fonts.fontconfig.defaultFonts = {
+      monospace = [
+        "Iosevka Nerd Font Mono"
+        "IPAGothic"
+      ];
+      sansSerif = [
+        "Iosevka Nerd Font"
+        "IPAPGothic"
+      ];
+      serif = [
+        "Noto Serif"
+        "IPAPMincho"
+      ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -108,10 +142,18 @@
     wget
     hyprpaper
     wofi
+    rofi
     thunar
     brightnessctl
+    wlogout
+    fastfetch
     playerctl
+    rustup
     waybar
+    libmtp
+    mtpfs
+    clang
+    jmtpfs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
