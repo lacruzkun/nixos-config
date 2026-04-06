@@ -90,7 +90,7 @@
   users.users.lacruz = {
     isNormalUser = true;
     description = "lacruz";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel", "adbusers", "kvm"];
     packages = with pkgs; [
        tree
     #  thunderbird
@@ -112,6 +112,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.tinos
     nerd-fonts.iosevka
+    nerd-fonts.profont
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -124,11 +125,11 @@
 
   fonts.fontconfig.defaultFonts = {
       monospace = [
-        "Excalifont"
+        "Iosevka Nerd Font Mono"
         "IPAGothic"
       ];
       sansSerif = [
-        "Excalifont"
+        "ProFont Nerd Font"
         "IPAPGothic"
       ];
       serif = [
@@ -136,6 +137,20 @@
         "IPAPMincho"
       ];
   };
+
+  nixpkgs.config.android_sdk.accept_license = true;
+
+  environment.variables = {
+      ANDROID_HOME = "$HOME/.android/Android/Sdk";
+      ANDROID_SDK_ROOT = "$HOME/.android/Android/Sdk";
+      JAVA_HOME = "$(pkgs.jdk17)";
+  };
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+  ]
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -172,7 +187,14 @@
     # cargo
     # rust-analyzer
     # rustfmt
+
+    android-studio
+    jdk17
+    codium
   ];
+
+  programs.adb.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
