@@ -30,9 +30,9 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  i18n.inputMethod.enabled = "fcitx";
+  i18n.inputMethod.type = "fcitx5";
 
-  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ moz ];
+  # i18n.inputMethod.fcitx5.engines = with pkgs.fcitx-engines; [ moz ];
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_NG";
@@ -65,7 +65,7 @@
   services.gvfs.enable = true;
   services.udev.packages = with pkgs; [
     libmtp
-  ]
+  ];
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -112,24 +112,27 @@
   fonts.packages = with pkgs; [
     nerd-fonts.tinos
     nerd-fonts.iosevka
+    noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     ipafont
     kochi-substitute
+    texlivePackages.lobster2
+    excalifont
     dancing-script
-  ]
+  ];
 
   fonts.fontconfig.defaultFonts = {
       monospace = [
-        "Iosevka Nerd Font Mono"
+        "Excalifont"
         "IPAGothic"
       ];
       sansSerif = [
-        "Iosevka Nerd Font"
+        "Excalifont"
         "IPAPGothic"
       ];
       serif = [
-        "Noto Serif"
+        "Excalifont"
         "IPAPMincho"
       ];
   };
@@ -148,12 +151,27 @@
     wlogout
     fastfetch
     playerctl
-    rustup
     waybar
+
+    # storage mounting
     libmtp
     mtpfs
-    clang
     jmtpfs
+
+    # c development
+    gcc
+    gnumake
+    cmake
+    pkg-config
+    clang
+    clang-tools
+
+    # rust development
+    rustup
+    # rustc
+    # cargo
+    # rust-analyzer
+    # rustfmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
