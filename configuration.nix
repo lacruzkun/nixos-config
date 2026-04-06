@@ -9,7 +9,6 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -90,7 +89,7 @@
   users.users.lacruz = {
     isNormalUser = true;
     description = "lacruz";
-    extraGroups = [ "networkmanager" "wheel", "adbusers", "kvm"];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm"];
     packages = with pkgs; [
        tree
     #  thunderbird
@@ -137,12 +136,13 @@
         "IPAPMincho"
       ];
   };
-
+  nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
 
+
   environment.variables = {
-      ANDROID_HOME = "$HOME/.android/Android/Sdk";
-      ANDROID_SDK_ROOT = "$HOME/.android/Android/Sdk";
+      ANDROID_HOME = "$HOME/Android/Sdk";
+      ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
       JAVA_HOME = "$(pkgs.jdk17)";
   };
 
@@ -150,7 +150,7 @@
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc.lib
     zlib
-  ]
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -190,10 +190,10 @@
 
     android-studio
     jdk17
-    codium
+    vscodium
+    android-tools
   ];
 
-  programs.adb.enable = true;
 
 
   # Some programs need SUID wrappers, can be configured further or are
