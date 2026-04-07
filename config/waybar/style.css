@@ -1,0 +1,38 @@
+@import "colors.css";
+
+* {
+    all: unset;
+    font-family: "Rubik", "JetBrainsMono Nerd Font Propo", "Noto San CJK JP";
+ 
+}
+
+.modules-center {
+    background-color: @bg0;
+    padding: 2px 8px;
+    border-radius: 99px;
+}
+
+clock {
+    font-weight: 600;
+}
+
+#workspaces {
+    background-color: @bg1;
+    margin: 2px 0;
+    border-radius: 99px;
+}
+
+#workspaces button {
+    background-color: @bg2;
+    padding: 5px;
+    border-radius: 99px;
+    margin: 0 2px;
+    transition: all 300ms ease-in-out;
+}
+
+#workspaces button.active {
+    background-color: @blue;
+    color: @bg0;
+    min-width: 2rem;
+    font-weight: 500;
+}

@@ -1,6 +1,10 @@
 {
     "layer": "bottom",
 
+    "spacing": 18,
+
+    "margin-top": 10,
+
     "modules-center": ["clock", "hyprland/workspace", "pulseaudio", "network", "battery"],
 
     "clock": {
@@ -11,10 +15,14 @@
         "format": "{name}",
         "format-icons": {
             "1": "1",
+            "2": "2",
+            "active": "",
+            "default": "",
         },
         "persistent-workspaces": {
-            "*": 1,
+            "*": 2,
         },
+        "on-click": "activate",
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",

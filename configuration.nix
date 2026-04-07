@@ -112,6 +112,8 @@
     nerd-fonts.tinos
     nerd-fonts.iosevka
     nerd-fonts.profont
+    nerd-fonts.jetbrains-mono
+    rubik
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -158,6 +160,9 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     kitty
     wget
+    mpv
+    strawberry
+    qimgv
     hyprpaper
     wofi
     rofi
@@ -167,11 +172,13 @@
     fastfetch
     playerctl
     waybar
+    pavucontrol
 
     # storage mounting
     libmtp
     mtpfs
     jmtpfs
+    python3
 
     # c development
     gcc
