@@ -5,24 +5,32 @@
 
     "margin-top": 10,
 
-    "modules-center": ["clock", "hyprland/workspace", "pulseaudio", "network", "battery"],
+    "modules-center": ["clock", "hyprland/workspaces", "pulseaudio", "network", "battery"],
 
     "clock": {
-        "interval": 60,
-        "format": "{:%H:%M}",
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
     },
-    "hyprland/workspace": {
-        "format": "{name}",
+    "hyprland/workspaces": {
+        "format": "{icon}",
         "format-icons": {
             "1": "1",
             "2": "2",
-            "active": "",
-            "default": "",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10",
         },
         "persistent-workspaces": {
-            "*": 2,
+            "eDP-1": [1],
         },
         "on-click": "activate",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",
@@ -54,14 +62,7 @@
         "max-length": 50
     },
     "battery": {
-        "bat": "BAT2",
-        "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity}%",
         "format-icons": ["", "", "", "", ""],
-        "max-length": 25
     },
 }
