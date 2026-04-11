@@ -19,4 +19,5 @@
   home.file.".vim".source = ./config/vim;
   home.file.".config/waybar".source = ./config/waybar;
   home.file.".config/wofi".source = ./config/wofi;
+  home.file.".config/kitty".source = ./config/kitty;
 }
