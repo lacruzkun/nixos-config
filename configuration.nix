@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -14,19 +10,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Africa/Lagos";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.inputMethod.type = "fcitx5";
@@ -142,7 +129,7 @@
   environment.variables = {
       ANDROID_HOME = "$HOME/Android/Sdk";
       ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
-      JAVA_HOME = "$(pkgs.jdk17)";
+      JAVA_HOME = "${pkgs.jdk17}";
   };
 
   programs.nix-ld.enable = true;
@@ -176,6 +163,14 @@
     p7zip
     heroic
     fish
+    zsh
+    ffmpeg-full
+    obs-studio
+    wine
+    ruff
+
+    # web dev
+    nodejs_24
 
     # storage mounting
     libmtp

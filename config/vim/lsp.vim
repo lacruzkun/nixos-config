@@ -15,6 +15,13 @@ let lspServers = [
       \   path: 'rust-analyzer',
       \   args: []
       \ },
+      \
+      \ #{
+      \   name: 'ruff',
+      \   filetype: ['python', 'py'],
+      \   path: 'ruff',
+      \   args: []
+      \ },
       \ ]
 
 autocmd User LspSetup call LspAddServer(lspServers)
