@@ -16,9 +16,18 @@
 
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  i18n.inputMethod.type = "fcitx5";
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+  };
 
-  # i18n.inputMethod.fcitx5.engines = with pkgs.fcitx-engines; [ moz ];
+  i18n.inputMethod.enabled = "fcitx5";
+
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_NG";
@@ -168,6 +177,9 @@
     obs-studio
     wine
     ruff
+    leveldb
+    sslh
+    google-chrome
 
     # web dev
     nodejs_24
@@ -177,6 +189,8 @@
     mtpfs
     jmtpfs
     python3
+    prettier
+    ruff
 
     # c development
     gcc
@@ -198,6 +212,9 @@
     jdk17
     vscodium
     android-tools
+
+    #research
+    zotero
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

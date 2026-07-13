@@ -20,4 +20,5 @@
   home.file.".config/waybar".source = ./config/waybar;
   home.file.".config/wofi".source = ./config/wofi;
   home.file.".config/kitty".source = ./config/kitty;
+  home.file.".config/rofi".source = ./config/rofi;
 }
