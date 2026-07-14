@@ -25,8 +25,6 @@
     ];
   };
 
-  i18n.inputMethod.enabled = "fcitx5";
-
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
   i18n.extraLocaleSettings = {
@@ -140,12 +138,23 @@
       ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
       JAVA_HOME = "${pkgs.jdk17}";
   };
+  environment.sessionVariables = {
+    GNOME_KEYRING_CONTROL = "$XDG_RUNTIME_DIR/keyring";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    INPUT_METHOD = "fcitx";      # helps some Wayland-native / GTK4 apps
+    GLFW_IM_MODULE = "ibus";     # some GLFW apps (e.g. some games) expect this even with fcitx
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc.lib
     zlib
   ];
+  services.gnome.gnome-keyring.enable = true;
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -166,6 +175,8 @@
     playerctl
     waybar
     pavucontrol
+    gnome-keyring
+    libsecret
 
     blender
     unzip
