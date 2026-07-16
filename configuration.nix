@@ -155,6 +155,11 @@
   ];
   services.gnome.gnome-keyring.enable = true;
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;   # <-- this is almost certainly your missing piece
+  };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -186,11 +191,14 @@
     zsh
     ffmpeg-full
     obs-studio
-    wine
+    wineWow64Packages.stable   # or .staging for bleeding-edge fixes
+    winetricks
+    gamemode
     ruff
     leveldb
     sslh
     google-chrome
+    anki
 
     # web dev
     nodejs_24
@@ -200,8 +208,11 @@
     mtpfs
     jmtpfs
     python3
+    python313Packages.python-lsp-server
+    python313Packages.pylsp-mypy
+    python313Packages.python-lsp-ruff
+    python313Packages.python-lsp-black
     prettier
-    ruff
 
     # c development
     gcc

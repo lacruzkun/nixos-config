@@ -17,9 +17,9 @@ let lspServers = [
       \ },
       \
       \ #{
-      \   name: 'ruff',
+      \   name: 'pylsp',
       \   filetype: ['python', 'py'],
-      \   path: 'ruff',
+      \   path: 'pylsp',
       \   args: []
       \ },
       \ ]
