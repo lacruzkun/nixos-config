@@ -185,6 +185,7 @@
     obsidian
     pcmanfm
     nemo
+    calibre
 
     blender
     unzip
@@ -202,6 +203,7 @@
     sslh
     google-chrome
     anki
+    ppsspp
 
     # web dev
     nodejs_24
@@ -217,6 +219,7 @@
     python313Packages.python-lsp-black
     prettier
     basedpyright
+    lua
 
     # c development
     gcc
