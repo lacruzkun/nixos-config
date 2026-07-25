@@ -182,6 +182,9 @@
     pavucontrol
     gnome-keyring
     libsecret
+    obsidian
+    pcmanfm
+    nemo
 
     blender
     unzip
@@ -213,6 +216,7 @@
     python313Packages.python-lsp-ruff
     python313Packages.python-lsp-black
     prettier
+    basedpyright
 
     # c development
     gcc
