@@ -186,9 +186,17 @@
     pcmanfm
     nemo
     calibre
+    grim
+    slurp
+    swappy
+    wl-clipboard
+    hyprshot
+    libnotify
+    remmina
 
     blender
     unzip
+    unrar
     p7zip
     heroic
     fish
@@ -212,6 +220,8 @@
     libmtp
     mtpfs
     jmtpfs
+
+    # general programming stuff
     python3
     python313Packages.python-lsp-server
     python313Packages.pylsp-mypy
@@ -220,6 +230,8 @@
     prettier
     basedpyright
     lua
+    ocaml
+    tesseract
 
     # c development
     gcc
@@ -229,6 +241,8 @@
     pkg-config
     clang
     clang-tools
+    linuxHeaders
+    wtype
 
     # rust development
     rustup
