@@ -206,6 +206,7 @@
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
     gamemode
+    vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
     sslh

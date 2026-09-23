@@ -12,3 +12,5 @@ set backspace=indent,eol,start
 
 syntax on
 
+autocmd BufNewFile,BufRead *.luau setf luau
+autocmd FileType luau setlocal syntax=lua

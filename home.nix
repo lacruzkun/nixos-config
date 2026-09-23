@@ -15,6 +15,10 @@
       fi
     '';
   };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
   home.file.".config/hypr".source = ./config/hypr;
   home.file.".vim".source = ./config/vim;
   home.file.".config/waybar".source = ./config/waybar;

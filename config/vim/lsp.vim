@@ -29,7 +29,15 @@ let lspServers = [
       \   path: 'basedpyright-langserver',
       \   args: ['--stdio']
       \ },
-      \ ]
+      \
+      \
+      \ #{
+      \   name: 'luau-lsp',
+      \   filetype: ['luau'],
+      \   path: 'luau-lsp',
+      \   args: ['lsp']
+      \ },
+]
 
 autocmd User LspSetup call LspAddServer(lspServers)
 
