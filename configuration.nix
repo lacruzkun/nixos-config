@@ -255,6 +255,7 @@
     jdk17
     vscodium
     android-tools
+    flutter
 
     #research
     zotero
