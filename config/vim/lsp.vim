@@ -37,7 +37,7 @@ let lspServers = [
       \   path: 'luau-lsp',
       \   args: ['lsp']
       \ },
-]
+      \ ]
 
 autocmd User LspSetup call LspAddServer(lspServers)
 

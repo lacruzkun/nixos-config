@@ -159,6 +159,7 @@
     enable = true;
     enable32Bit = true;   # <-- this is almost certainly your missing piece
   };
+  programs.gamemode.enable = true;
 
 
   # List packages installed in system profile. To search, run:
@@ -205,7 +206,6 @@
     obs-studio
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
-    gamemode
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
