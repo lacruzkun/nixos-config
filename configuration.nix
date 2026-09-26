@@ -7,6 +7,7 @@
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10; # keep only the last 10 generations bootable, so /boot doesn't fill up
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -76,6 +77,11 @@
     #media-session.enable = true;
   };
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true; # turn the adapter on at boot instead of leaving it off
+  services.blueman.enable = true; # provides blueman-manager, used by the waybar bluetooth module
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lacruz = {
     isNormalUser = true;
@@ -137,6 +143,7 @@
       ANDROID_HOME = "$HOME/Android/Sdk";
       ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
       JAVA_HOME = "${pkgs.jdk17}";
+      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}"; # lets rust-analyzer jump into std without `rustup component add rust-src`
   };
   environment.sessionVariables = {
     GNOME_KEYRING_CONTROL = "$XDG_RUNTIME_DIR/keyring";
@@ -172,6 +179,7 @@
     strawberry
     qimgv
     hyprpaper
+    hypridle
     wofi
     rofi
     thunar
@@ -231,6 +239,7 @@
     prettier
     basedpyright
     lua
+    luau-lsp
     ocaml
     tesseract
 
@@ -249,7 +258,7 @@
     rustup
     # rustc
     # cargo
-    # rust-analyzer
+    rust-analyzer
     # rustfmt
 
     android-studio
@@ -263,6 +272,20 @@
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Compressed RAM swap - cheap insurance against OOM kills during heavy builds/compiles
+  zramSwap.enable = true;
+
+  # Keep the nix store from growing unbounded
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+  nix.optimise.automatic = true;
+
+  # Periodically trim SSDs; a no-op on drives that don't support TRIM
+  services.fstrim.enable = true;
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
