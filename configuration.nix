@@ -3,6 +3,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      # Absolute path on purpose: this file is gitignored, and flakes only
+      # see git-tracked files inside the repo, so a relative ./ path here
+      # would fail with "path does not exist" even though it's on disk.
       /etc/nixos/hardware-configuration.nix
     ];
   # Bootloader.
@@ -69,8 +72,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true; # lets JACK-API apps (Ardour) talk to PipeWire directly
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -86,7 +88,7 @@
   users.users.lacruz = {
     isNormalUser = true;
     description = "lacruz";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm"];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" "audio"];
     packages = with pkgs; [
        tree
     #  thunderbird
@@ -222,6 +224,14 @@
     anki
     ppsspp
 
+    # music production
+    ardour
+    qpwgraph          # patchbay GUI for wiring up PipeWire/JACK audio routing
+    calf              # solid general-purpose LV2 EQ/comp/synth bundle
+    x42-plugins       # metering, EQ, utility LV2 plugins
+    lsp-plugins       # large, high-quality LV2 mixing/mastering bundle
+    distrho-ports     # DISTRHO/Kx synths and effects (LV2/VST)
+
     # web dev
     nodejs_24
 
@@ -261,10 +271,10 @@
     rust-analyzer
     # rustfmt
 
-    android-studio
+    #android-studio
     jdk17
     vscodium
-    android-tools
+    #android-tools
     flutter
 
     #research
