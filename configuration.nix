@@ -84,11 +84,23 @@
   hardware.bluetooth.powerOnBoot = true; # turn the adapter on at boot instead of leaving it off
   services.blueman.enable = true; # provides blueman-manager, used by the waybar bluetooth module
 
+  # SSH server - key-based auth only, no root login, no passwords over the network
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lacruz = {
     isNormalUser = true;
     description = "lacruz";
     extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" "audio"];
+    openssh.authorizedKeys.keys = [
+      # paste your public key(s) here, one string per line - see chat for how to generate one
+    ];
     packages = with pkgs; [
        tree
     #  thunderbird
@@ -231,6 +243,21 @@
     x42-plugins       # metering, EQ, utility LV2 plugins
     lsp-plugins       # large, high-quality LV2 mixing/mastering bundle
     distrho-ports     # DISTRHO/Kx synths and effects (LV2/VST)
+
+    # synths
+    surge-xt          # flagship open-source wavetable synth
+    vital             # freemium wavetable synth (free tier, official build - not fully open source)
+    dexed             # DX7-style FM synth
+    zynaddsubfx       # huge built-in synth/instrument library (additive/subtractive/pad)
+
+    # piano / general MIDI
+    fluidsynth        # softsynth that plays soundfonts
+    soundfont-fluid   # free GM soundfont - includes a usable acoustic piano patch
+    qsynth            # GUI front-end for picking soundfonts/patches on fluidsynth
+
+    # drums
+    hydrogen          # standalone drum machine/sequencer, ships with default kits
+    geonkick           # synthesized drum/percussion plugin, no sample downloads needed
 
     # web dev
     nodejs_24
