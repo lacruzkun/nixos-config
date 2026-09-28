@@ -182,13 +182,6 @@
   };
   programs.gamemode.enable = true;
 
-  programs.steam = {
-    enable = true;
-
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
-  };
   # Link Proton-GE into the compatibility tools directory for Heroic.
   # This uses the correct 'steamcompattool' output, which is a directory.
   systemd.user.tmpfiles = {
