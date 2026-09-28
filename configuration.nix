@@ -182,6 +182,14 @@
   };
   programs.gamemode.enable = true;
 
+  programs.steam = {
+    enable = true;
+
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -228,7 +236,6 @@
     obs-studio
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
-    proton-ge-bin
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
