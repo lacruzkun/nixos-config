@@ -230,6 +230,7 @@
     wl-clipboard
     hyprshot
     libnotify
+    mako
     remmina
 
     blender
