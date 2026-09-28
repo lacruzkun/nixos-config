@@ -245,6 +245,7 @@
     obs-studio
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
+    dolphine.emu
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
