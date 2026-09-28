@@ -237,6 +237,7 @@
     unzip
     unrar
     p7zip
+    cabextract
     heroic
     fish
     zsh
