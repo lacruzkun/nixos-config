@@ -189,6 +189,20 @@
       proton-ge-bin
     ];
   };
+  # Link Proton-GE into the compatibility tools directory for Heroic.
+  # This uses the correct 'steamcompattool' output, which is a directory.
+  systemd.user.tmpfiles = {
+    enable = true;
+    rules = let
+      # Heroic looks for compatibility tools in this directory by default.
+      compatdir = "%h/.steam/root/compatibilitytools.d";
+      link = "${compatdir}/Proton-GE";
+      target = pkgs.proton-ge-bin.steamcompattool.outPath;
+    in [
+      "d ${compatdir} - - - - -"
+      "L+ ${link} - - - - ${target}"
+    ];
+  };
 
 
   # List packages installed in system profile. To search, run:
