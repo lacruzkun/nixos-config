@@ -245,7 +245,8 @@
     obs-studio
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
-    dolphine.emu
+    dolphin-emu
+    xemu
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
@@ -314,6 +315,7 @@
     # rustc
     # cargo
     rust-analyzer
+    btop
     # rustfmt
 
     #android-studio
