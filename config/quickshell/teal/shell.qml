@@ -3,6 +3,7 @@
 
 import QtQuick
 import Quickshell
+import Quickshell.Io        // <- add this line
 import Quickshell.Hyprland
 import qs.Components
 import qs.Services
