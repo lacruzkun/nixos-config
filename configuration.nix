@@ -341,6 +341,7 @@
 
     #research
     zotero
+    mangayomi
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
