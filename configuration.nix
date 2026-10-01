@@ -213,6 +213,12 @@
       '';
     };
 
+    {
+  services.suwayomi-server = {
+      enable = true;
+    };
+  }
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -341,7 +347,6 @@
 
     #research
     zotero
-    mangayomi
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
