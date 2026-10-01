@@ -19,12 +19,16 @@
     enable = true;
     nix-direnv.enable = true;
   };
+
+  programs.quickshell = {
+    enable = true;
+    configs.teal = ./config/quickshell/teal;
+    activeConfig = "teal";
+  };
+
   home.file.".config/hypr".source = ./config/hypr;
   home.file.".vim".source = ./config/vim;
-  home.file.".config/waybar".source = ./config/waybar;
-  home.file.".config/wofi".source = ./config/wofi;
   home.file.".config/kitty".source = ./config/kitty;
-  home.file.".config/rofi".source = ./config/rofi;
   home.file.".config/mako".source = ./config/mako;
 
   # Keep the screenshot destination available after every Home Manager switch.

@@ -1,0 +1,12 @@
+singleton UiState UiState.qml
+singleton IslandState IslandState.qml
+singleton AudioData AudioData.qml
+singleton BrightnessData BrightnessData.qml
+singleton NetworkData NetworkData.qml
+singleton BluetoothData BluetoothData.qml
+singleton BatteryData BatteryData.qml
+singleton MediaData MediaData.qml
+singleton SystemData SystemData.qml
+singleton ClipboardData ClipboardData.qml
+singleton NotificationData NotificationData.qml
+singleton Actions Actions.qml

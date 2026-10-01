@@ -24,5 +24,6 @@ default-timeout=7000
 # urgency so normal notifications continue to expire automatically.
 [urgency=critical]
 default-timeout=0
+on-notify=exec quickshell -c teal ipc call shell notify "$id"
 ignore-timeout=1
 border-color=#ffb0abFF

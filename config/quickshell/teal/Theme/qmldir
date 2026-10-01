@@ -1,0 +1,4 @@
+singleton Colors Colors.qml
+singleton Metrics Metrics.qml
+singleton Typography Typography.qml
+singleton Animations Animations.qml

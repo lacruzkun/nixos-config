@@ -176,6 +176,8 @@
   ];
   services.gnome.gnome-keyring.enable = true;
 
+  services.upower.enable = true;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;   # <-- this is almost certainly your missing piece
@@ -223,14 +225,12 @@
     qimgv
     hyprpaper
     hypridle
-    wofi
-    rofi
     thunar
     brightnessctl
     wlogout
+    cliphist
     fastfetch
     playerctl
-    waybar
     pavucontrol
     gnome-keyring
     libsecret
