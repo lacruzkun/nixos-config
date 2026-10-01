@@ -217,7 +217,6 @@
   services.suwayomi-server = {
       enable = true;
     };
-  }
 
 
   # List packages installed in system profile. To search, run:
