@@ -14,31 +14,28 @@ Item {
     signal activated()
     signal hovered()
 
-    height: 54
+    height: 52
     width: ListView.view ? ListView.view.width : 400
 
     Rectangle {
         anchors.fill: parent
-        anchors.leftMargin: 2; anchors.rightMargin: 2
-        radius: Metrics.radiusCard - 4
-        color: root.selected ? Colors.accentSoft : area.containsMouse ? Qt.alpha(Colors.accentSoft, 0.4) : "transparent"
-        border.width: root.selected ? 1 : 0
-        border.color: Colors.accent
+        radius: height / 2                                   // pill rows, as in the Rofi list
+        color: root.selected ? Colors.accent : area.containsMouse ? Colors.accentSoft : "transparent"
         Behavior on color { ColorAnimation { duration: Animations.fast } }
     }
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 12; anchors.rightMargin: 14
+        anchors.leftMargin: 14; anchors.rightMargin: 18
         spacing: 12
 
         Item {
-            Layout.preferredWidth: 36
-            Layout.preferredHeight: 36
+            Layout.preferredWidth: 34
+            Layout.preferredHeight: 34
             AppIcon {
                 anchors.fill: parent
                 visible: root.modelData.glyph === undefined
-                size: 36
+                size: 34
                 name: root.modelData.icon || ""
             }
             Rectangle {

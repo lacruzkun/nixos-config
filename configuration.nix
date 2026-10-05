@@ -213,7 +213,6 @@
       '';
     };
 
-    {
   services.suwayomi-server = {
       enable = true;
     };
@@ -324,10 +323,12 @@
     gnumake
     cmake
     gdb
+    gf
     pkg-config
     clang
     clang-tools
     linuxHeaders
+    openal
     wtype
 
     # rust development
@@ -346,6 +347,7 @@
 
     #research
     zotero
+    qbittorrent
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
