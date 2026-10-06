@@ -328,6 +328,8 @@
     clang
     clang-tools
     linuxHeaders
+    vulkan-tools   # vulkaninfo, vkcube
+    renderdoc
     openal
     wtype
 

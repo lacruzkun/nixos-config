@@ -6,7 +6,7 @@ let lspServers = [
       \   name: 'clangd',
       \   filetype: ['c', 'cpp'],
       \   path: 'clangd',
-      \   args: []
+      \   args: ['--query-driver=/nix/store/*/bin/*', '--background-index']
       \ },
       \
       \ #{
