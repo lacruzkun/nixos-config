@@ -275,7 +275,7 @@
     ppsspp
 
     # music production
-    ardour
+    reaper
     qpwgraph          # patchbay GUI for wiring up PipeWire/JACK audio routing
     calf              # solid general-purpose LV2 EQ/comp/synth bundle
     x42-plugins       # metering, EQ, utility LV2 plugins
@@ -339,6 +339,11 @@
     # cargo
     rust-analyzer
     btop
+    (solana-cli.overrideAttrs (oldAttrs: {
+        env = (oldAttrs.env or {}) // {
+          RUSTFLAGS = (oldAttrs.env.RUSTFLAGS or "") + " --cap-lints allow";
+        };
+    }))
     # rustfmt
 
     #android-studio
