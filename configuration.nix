@@ -227,7 +227,6 @@
     mpv
     strawberry
     qimgv
-    hyprpaper
     hypridle
     thunar
     brightnessctl
@@ -248,7 +247,6 @@
     wl-clipboard
     hyprshot
     libnotify
-    mako
     remmina
 
     blender
@@ -307,6 +305,7 @@
 
     # general programming stuff
     python3
+    uv # Required by Noctalia's local wallpaper-depth model setup
     python313Packages.python-lsp-server
     python313Packages.pylsp-mypy
     python313Packages.python-lsp-ruff
