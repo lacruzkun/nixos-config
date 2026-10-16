@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      # Absolute path on purpose: this file is gitignored, and flakes only
+  imports = [ # Include the results of the hardware scan.  # Absolute path on purpose: this file is gitignored, and flakes only
       # see git-tracked files inside the repo, so a relative ./ path here
       # would fail with "path does not exist" even though it's on disk.
       /etc/nixos/hardware-configuration.nix
@@ -50,6 +48,7 @@
   services.getty.autologinUser = "lacruz";
 
   programs.hyprland.enable = true;
+  programs.dconf.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -167,6 +166,12 @@
     SDL_IM_MODULE = "fcitx";
     INPUT_METHOD = "fcitx";      # helps some Wayland-native / GTK4 apps
     GLFW_IM_MODULE = "ibus";     # some GLFW apps (e.g. some games) expect this even with fcitx
+    XDG_DATA_DIRS = let
+                        schema = pkgs.gsettings-desktop-schemas;
+                    in
+                    [
+                        "${schema}/share/gsettings-schemas/${schema.name}"
+                    ];
   };
 
   programs.nix-ld.enable = true;
@@ -304,12 +309,16 @@
     jmtpfs
 
     # general programming stuff
-    python3
-    uv # Required by Noctalia's local wallpaper-depth model setup
+    (python3.withPackages (ps: with ps; [
+      numpy
+      onnxruntime
+      pillow
+    ]))
     python313Packages.python-lsp-server
     python313Packages.pylsp-mypy
     python313Packages.python-lsp-ruff
     python313Packages.python-lsp-black
+    uv # Required by Noctalia's local wallpaper-depth model setup
     prettier
     basedpyright
     lua
@@ -334,8 +343,6 @@
 
     # rust development
     rustup
-    # rustc
-    # cargo
     rust-analyzer
     btop
     (solana-cli.overrideAttrs (oldAttrs: {
@@ -343,17 +350,16 @@
           RUSTFLAGS = (oldAttrs.env.RUSTFLAGS or "") + " --cap-lints allow";
         };
     }))
-    # rustfmt
 
-    #android-studio
-    jdk17
-    vscodium
-    #android-tools
-    flutter
 
     #research
-    zotero
     qbittorrent
+    glib
+    gsettings-desktop-schemas
+    dconf
+    adw-gtk3
+    nwg-look
+    qt6Packages.qt6ct
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

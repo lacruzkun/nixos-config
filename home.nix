@@ -7,6 +7,14 @@
 
   imports = [ inputs.noctalia.homeModules.default ];
 
+  home.packages = with pkgs; [
+      adw-gtk3
+      glib
+      gsettings-desktop-schemas
+      dconf
+      nwg-look
+  ];
+
   programs.bash = {
     enable = true;
     shellAliases = {
