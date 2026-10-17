@@ -243,8 +243,6 @@
     gnome-keyring
     libsecret
     obsidian
-    pcmanfm
-    nemo
     calibre
     grim
     slurp
@@ -267,46 +265,16 @@
     obs-studio
     wineWow64Packages.stable   # or .staging for bleeding-edge fixes
     winetricks
-    dolphin-emu
-    xemu
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
     leveldb
     sslh
     google-chrome
     anki
-    ppsspp
-
-    # music production
-    reaper
-    qpwgraph          # patchbay GUI for wiring up PipeWire/JACK audio routing
-    calf              # solid general-purpose LV2 EQ/comp/synth bundle
-    x42-plugins       # metering, EQ, utility LV2 plugins
-    lsp-plugins       # large, high-quality LV2 mixing/mastering bundle
-    distrho-ports     # DISTRHO/Kx synths and effects (LV2/VST)
-
-    # synths
-    surge-xt          # flagship open-source wavetable synth
-    vital             # freemium wavetable synth (free tier, official build - not fully open source)
-    dexed             # DX7-style FM synth
-    zynaddsubfx       # huge built-in synth/instrument library (additive/subtractive/pad)
-
-    # piano / general MIDI
-    fluidsynth        # softsynth that plays soundfonts
-    soundfont-fluid   # free GM soundfont - includes a usable acoustic piano patch
-    qsynth            # GUI front-end for picking soundfonts/patches on fluidsynth
-
-    # drums
-    hydrogen          # standalone drum machine/sequencer, ships with default kits
-    geonkick           # synthesized drum/percussion plugin, no sample downloads needed
 
     # web dev
     nodejs_24
 
-    # storage mounting
-    libmtp
-    mtpfs
-    jmtpfs
 
     # general programming stuff
     (python3.withPackages (ps: with ps; [
@@ -323,7 +291,6 @@
     basedpyright
     lua
     luau-lsp
-    ocaml
     tesseract
 
     # c development

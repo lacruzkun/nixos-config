@@ -1,11 +1,14 @@
 [bar.main]
-background_opacity = 0.69999998435378075
-capsule = false
-center = [ "clock" ]
+background_opacity = 0.0
+capsule = true
+capsule_border_width = 0.5
+capsule_padding = 9.0
+capsule_radius = 4
+capsule_thickness = 0.99999998137354851
+center = [ "clock", "media" ]
 compositor_blur = true
 contact_shadow = true
 end = [
-    "media",
     "tray",
     "notifications",
     "clipboard",
@@ -18,7 +21,7 @@ end = [
     "session"
 ]
 margin_edge = 8
-margin_ends = 140
+margin_ends = 8
 padding = 12
 position = "top"
 radius = 14
@@ -27,6 +30,9 @@ shadow = true
 start = [ "launcher", "wallpaper", "workspaces" ]
 thickness = 40
 widget_spacing = 6
+
+[battery]
+warning_threshold = 21
 
 [desktop_widgets]
 enabled = true
@@ -78,6 +84,9 @@ widget_order = [ "depth_clock_hours", "depth_clock_minutes" ]
         format = "{:%M}"
         shadow = true
 
+[dock]
+icon_size = 32
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
@@ -120,6 +129,7 @@ auto_update = "official"
 enabled = [ "noctalia/wallpaper_depth" ]
 
 [shell]
+avatar_path = "/home/lacruz/nixos-config/config/noctalia/image_2022-06-26_12-05-18.png"
 clipboard_enabled = true
 clipboard_history_max_entries = 100
 date_format = "%A, %x"
@@ -137,7 +147,7 @@ time_format = "{:%H:%M}"
     launcher_position = "center"
     session_placement = "attached"
     shadow = true
-    transparency_mode = "glass"
+    transparency_mode = "solid"
     wallpaper_placement = "attached"
 
     [shell.screen_corners]
@@ -152,7 +162,7 @@ source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "hyprland", "kitty", "gtk3", "gtk4", "qt" ]
+    builtin_ids = [ "gtk3", "gtk4", "hyprland", "kitty", "qt" ]
     community_ids = [ "blender", "obsidian", "fastfetch" ]
     enable_builtin_templates = true
     enable_community_templates = true
@@ -163,6 +173,7 @@ enabled = true
 fill_mode = "crop"
 transition = [ "fade", "wipe", "zoom" ]
 transition_duration = 900
+transition_on_startup = true
 
     [wallpaper.default]
     path = "/home/lacruz/Pictures/Wallpapers/0009.jpg"
@@ -172,3 +183,16 @@ transition_duration = 900
 
     [wallpaper.monitors.eDP-1]
     path = "/home/lacruz/Pictures/Wallpapers/0009.jpg"
+
+[widget.media]
+font_scale = 0.75
+hide_when_no_media = true
+rotate_album_art = true
+scale = 1.5
+
+[widget.workspaces]
+active_pill_size = 2.0
+capsule_radius = 9
+focused_color = "tertiary"
+scale = 1.5
+urgent_color = "on_error"
