@@ -303,10 +303,21 @@
     clang
     clang-tools
     linuxHeaders
-    vulkan-tools   # vulkaninfo, vkcube
     renderdoc
     openal
     wtype
+
+    # graphics programming
+    vulkan-tools   # vulkaninfo, vkcube
+    vulkan-headers
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools-lunarg
+    shaderc
+    glslang
+    spirv-tools
+    glm
+    sdl3
 
     # rust development
     rustup
@@ -330,6 +341,14 @@
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
+
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+      vulkan-loader
+      waylan
+      libxkbcommon
+  ]);
 
   # Compressed RAM swap - cheap insurance against OOM kills during heavy builds/compiles
   zramSwap.enable = true;
