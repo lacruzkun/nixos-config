@@ -78,6 +78,14 @@
     #media-session.enable = true;
   };
 
+  xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+      ];
+  };
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true; # turn the adapter on at boot instead of leaving it off
@@ -274,6 +282,9 @@
 
     # web dev
     nodejs_24
+    ghidra-bin
+    openjdk21
+    procps
 
 
     # general programming stuff
@@ -338,17 +349,10 @@
     adw-gtk3
     nwg-look
     qt6Packages.qt6ct
+    opencode
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
-
-  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
-      vulkan-loader
-      waylan
-      libxkbcommon
-  ]);
 
   # Compressed RAM swap - cheap insurance against OOM kills during heavy builds/compiles
   zramSwap.enable = true;
