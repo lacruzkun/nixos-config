@@ -6,7 +6,10 @@
 , alsa-lib
 , freetype
 , libglvnd
-, xorg
+, libice
+, libsm
+, libx11
+, libxext
 }:
 
 stdenv.mkDerivation {
@@ -17,7 +20,7 @@ stdenv.mkDerivation {
     name = "VitalInstaller.tar.gz";
 
     # Replace this with the hash you calculated.
-    hash = "m6mfcGRpX8Eslypf115BsXzt1I0PBabFgvBjl+2UJwc=";
+    hash = "sha256-m6mfcGRpX8Eslypf115BsXzt1I0PBabFgvBjl+2UJwc=";
 
     message = ''
       Add the archive with:
@@ -34,22 +37,25 @@ stdenv.mkDerivation {
     freetype
     libglvnd
     stdenv.cc.cc.lib
-
     libice
     libsm
     libx11
     libxext
   ];
 
-  installPhase = ''
-    runHook preInstall
+    installPhase = ''
+      runHook preInstall
 
-    mkdir -p $out
-    cp -a lib $out/
+      mkdir -p $out
+      cp -a lib $out/
 
-    runHook postInstall
-  '';
+      chmod +x \
+        $out/lib/clap/Vital.clap \
+        $out/lib/vst/Vital.so \
+        $out/lib/vst3/Vital.vst3/Contents/x86_64-linux/Vital.so
 
+      runHook postInstall
+    '';
   meta = {
     description = "Vital wavetable synthesizer plugins";
     homepage = "https://vital.audio/";

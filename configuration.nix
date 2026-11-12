@@ -59,6 +59,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.gvfs.enable = true;
+
   services.udev.packages = with pkgs; [
     libmtp
   ];
@@ -186,6 +187,15 @@
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc.lib
     zlib
+    alsa-lib
+    freetype
+    libglvnd
+    stdenv.cc.cc.lib
+
+    libice
+    libsm
+    libx11
+    libxext
   ];
   services.gnome.gnome-keyring.enable = true;
 
@@ -226,9 +236,7 @@
       '';
     };
 
-  services.suwayomi-server = {
-      enable = true;
-    };
+
 
 
   # List packages installed in system profile. To search, run:
@@ -259,6 +267,8 @@
     hyprshot
     libnotify
     remmina
+    samba
+    cifs-utils
 
     blender
     godot
@@ -271,7 +281,7 @@
     zsh
     ffmpeg-full
     obs-studio
-    wineWow64Packages.stable   # or .staging for bleeding-edge fixes
+    wine-staging
     winetricks
     vinegar   # bootstrapper for running Roblox Studio on Linux (via Wine)
     ruff
@@ -332,7 +342,6 @@
 
     # rust development
     rustup
-    rust-analyzer
     btop
     (solana-cli.overrideAttrs (oldAttrs: {
         env = (oldAttrs.env or {}) // {
@@ -350,6 +359,12 @@
     nwg-look
     qt6Packages.qt6ct
     opencode
+
+    reaper
+    yabridge
+    yabridgectl
+    sfizz-ui
+    (callPackage ./pkgs/vital.nix {})
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
