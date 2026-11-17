@@ -86,6 +86,7 @@ in
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    wireplumber.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -102,6 +103,8 @@ in
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
       ];
+
+      config.common.default = ["hyprland" "gtk"];
   };
 
   # Bluetooth
@@ -413,6 +416,7 @@ in
     adw-gtk3
     nwg-look
     qt6Packages.qt6ct
+    qt6Packages.qtwayland
     opencode
 
     reaper
