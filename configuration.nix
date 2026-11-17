@@ -1,10 +1,27 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+
+let
+    # https://codeberg.org/JuxGD/septabee-nix/archive/<thingy>.tar.gz, where <thingy> can be a commit hash or a branch name
+    # 
+    # if <thingy> is a branch name, this will allow one to use the latest package and module in the specified branch. this should autoupdate
+    # remember branches are named after the Septabee version they package. `main` being the exception, it always has the latest one (unless i forget to update lol)
+    #
+    # if <thingy> is a commit hash, this will pin it so the package and module will be the same as long as the commit hash isn't changed
+    #
+    # 
+    # in this example, <thingy> is "main", a branch name.
+    septabee = import (builtins.fetchTarball "https://codeberg.org/JuxGD/septabee-nix/archive/main.tar.gz"); # this also works with github.com it's the exact same
+in
 
 {
   imports = [ # Include the results of the hardware scan.  # Absolute path on purpose: this file is gitignored, and flakes only
       # see git-tracked files inside the repo, so a relative ./ path here
       # would fail with "path does not exist" even though it's on disk.
       /etc/nixos/hardware-configuration.nix
+
+      septabee.module
+        # if using a specified commit, note that some old commits don't provide the module. the module is necessary to run at full capacity
+        # these old commits also have no support for the `offline` option
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -127,6 +144,12 @@
 	};
   };
 
+  programs.septabee = {
+      enable = true;
+      waylandSupport = true;
+      offline = true;
+  };
+
   fonts.packages = with pkgs; [
     nerd-fonts.tinos
     nerd-fonts.iosevka
@@ -161,6 +184,10 @@
   nixpkgs.config.android_sdk.accept_license = true;
 
 
+  # Make headers from environment.systemPackages visible to GCC/Clang.
+  # NixOS does not link /include into the system profile by default.
+  environment.pathsToLink = [ "/include" ];
+
   environment.variables = {
       ANDROID_HOME = "$HOME/Android/Sdk";
       ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
@@ -175,6 +202,27 @@
     SDL_IM_MODULE = "fcitx";
     INPUT_METHOD = "fcitx";      # helps some Wayland-native / GTK4 apps
     GLFW_IM_MODULE = "ibus";     # some GLFW apps (e.g. some games) expect this even with fcitx
+
+    # System-wide C/C++ and Vulkan development paths. These make the headers,
+    # libraries and CMake/pkg-config metadata from systemPackages discoverable
+    # without entering a nix-shell or nix develop environment.
+    CPATH = "/run/current-system/sw/include";
+    LIBRARY_PATH = "/run/current-system/sw/lib";
+    PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig";
+    CMAKE_PREFIX_PATH = "/run/current-system/sw";
+    VULKAN_SDK = "/run/current-system/sw";
+    VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
+    LD_LIBRARY_PATH = lib.makeLibraryPath [
+      pkgs.vulkan-loader
+      pkgs.glfw
+      pkgs.sdl3
+      pkgs.vulkan-volk
+      pkgs.shaderc
+      pkgs.glslang
+      pkgs.spirv-tools
+      pkgs.spirv-cross
+    ];
+
     XDG_DATA_DIRS = let
                         schema = pkgs.gsettings-desktop-schemas;
                     in
@@ -318,6 +366,7 @@
     gcc
     gnumake
     cmake
+    ninja
     gdb
     gf
     pkg-config
@@ -328,17 +377,23 @@
     openal
     wtype
 
-    # graphics programming
-    vulkan-tools   # vulkaninfo, vkcube
-    vulkan-headers
-    vulkan-loader
-    vulkan-validation-layers
+    # Vulkan / graphics programming
+    vulkan-headers                 # Vulkan C and C++ headers, including Vulkan-Hpp
+    vulkan-loader                  # Vulkan runtime loader (libvulkan.so)
+    vulkan-tools                   # vulkaninfo, vkcube
     vulkan-tools-lunarg
-    shaderc
-    glslang
-    spirv-tools
-    glm
-    sdl3
+    vulkan-validation-layers       # VK_LAYER_KHRONOS_validation
+    vulkan-utility-libraries       # Khronos Vulkan utility libraries
+    vulkan-volk                    # Vulkan function-pointer/meta loader (not GNU Radio's `volk`)
+    vulkan-memory-allocator        # AMD Vulkan Memory Allocator (VMA)
+    glfw                           # GLFW window/input library
+    sdl3                           # SDL3 window/input library
+    glm                            # Header-only maths library
+    shaderc                        # GLSL/HLSL to SPIR-V compiler library and tools
+    glslang                        # Khronos GLSL reference compiler
+    spirv-headers                  # SPIR-V registry headers
+    spirv-tools                    # SPIR-V assembler, disassembler, validator and optimizer
+    spirv-cross                    # SPIR-V reflection and cross-compilation
 
     # rust development
     rustup
@@ -365,6 +420,7 @@
     yabridgectl
     sfizz-ui
     (callPackage ./pkgs/vital.nix {})
+    protobuf
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
